@@ -1,0 +1,98 @@
+{
+  "theme": "Light",
+  "archetype": "5 (Luxury - Ivory & Gold Cinematic)",
+  "color_palette": {
+    "background_primary": "#FAF9F6",
+    "background_secondary": "#FBFBF9",
+    "text_primary": "#2C2C2C",
+    "text_secondary": "#3B312A",
+    "accent_gold": "#D4AF37",
+    "accent_gold_deep": "#997A00",
+    "accent_blush_pink": "#F1D4D4",
+    "accent_rose_gold": "#B76E79",
+    "wax_seal_gold": "#D4AF37"
+  },
+  "typography": {
+    "font_primary": "Marcellus",
+    "font_secondary": "Allura",
+    "font_import_instruction": "Import Marcellus and Allura from Google Fonts in index.css: @import url('https://fonts.googleapis.com/css2?family=Allura&family=Marcellus&display=swap');",
+    "scale": {
+      "h1": "text-5xl sm:text-6xl tracking-tight font-secondary",
+      "h2": "text-3xl sm:text-4xl tracking-wide font-primary",
+      "h3": "text-xl sm:text-2xl font-primary",
+      "body": "text-base sm:text-lg leading-relaxed font-primary",
+      "script_accent": "text-4xl sm:text-5xl font-secondary text-accent_gold"
+    }
+  },
+  "spacing_and_layout": {
+    "mobile_first_padding": "px-6 py-12 md:px-12 md:py-24",
+    "touch_targets": "min-h-[48px] min-w-[48px] for all buttons/icons",
+    "container_max_width": "max-w-md mx-auto md:max-w-2xl"
+  },
+  "visual_blueprint": [
+    {
+      "section": "Hero Envelope Cover",
+      "description": "Full viewport height. Ivory paper texture background. A premium golden envelope centered on screen. Features a gold wax seal with a subtle shimmering animation. 'Pull to Open' hint.",
+      "components": ["EnvelopeWrapper", "DraggableFlap", "WaxSeal"]
+    },
+    {
+      "section": "Couple Names & Letter Start",
+      "description": "Revealed inside/after envelope opens. Elegant presentation of 'Aswathy ♡ Sanjay' using the Allura font. Surrounded by subtle rose gold floral accents.",
+      "components": ["TypographyH1", "OrnateDivider"]
+    },
+    {
+      "section": "Emotional Message",
+      "description": "Contains a Malayalam mantra accent (e.g. 'മാംഗല്യം' / 'Mangalyam' or 'Sreeragam') in subtle gold font, followed by an emotional invitation in English.",
+      "components": ["ScriptAccent", "BodyText"]
+    },
+    {
+      "section": "Scratch-to-Reveal Date",
+      "description": "Interactive scratch card area. Covered with a gold foil texture. User scratches (swipes/drags) to reveal '21 August 2026'. Upon 50% reveal, triggers a floral/petal confetti burst.",
+      "components": ["ScratchCanvas", "DateRevealText", "ConfettiBurst"]
+    },
+    {
+      "section": "Live Countdown",
+      "description": "Four minimal circular or vertical counters (Days, Hours, Minutes, Seconds) with rose gold borders and gold digits.",
+      "components": ["CountdownTimer", "TimeBlock"]
+    },
+    {
+      "section": "Venue & Details",
+      "description": "Information block for 'Kunnathoor Devi Temple, Kuttamperoor'. Includes time (10:00 am - 10:15 am). Styled with an elegant Google Maps CTA button.",
+      "components": ["LocationCard", "MapButton"]
+    },
+    {
+      "section": "Floating BGM Player",
+      "description": "Fixed bottom-right circular button with a vinyl or music note icon. Spins slowly when music is playing. Controls the uploaded Sreeragamo violin track.",
+      "components": ["AudioPlayerToggle"]
+    },
+    {
+      "section": "Footer & Share",
+      "description": "Minimalist ivory footer with 'Share the Love' section containing WhatsApp share and copy link buttons.",
+      "components": ["ShareButtons", "FooterText"]
+    }
+  ],
+  "micro_interactions": {
+    "envelope_drag": "Use framer-motion drag='y' on the flap. Map the drag Y offset to rotateX (0 to 180 degrees upwards). When fully open, scale down the envelope slightly, fade it out, and slide up the letter content.",
+    "golden_shimmer": "Apply a CSS mask-image or linear-gradient with background-position animation (-200% to 200%) over the wax seal SVG to create a looping shine effect.",
+    "scratch_mechanic": "Use an HTML5 <canvas> overlay over the date. On touchmove/mousemove, draw transparent circles (globalCompositeOperation='destination-out'). Calculate transparent pixel percentage. Snap to full transparent at 50%.",
+    "petal_burst": "Use canvas-confetti library on date reveal. Configure colors: ['#F1D4D4', '#B76E79', '#D4AF37'], set shapes to circles/ovals (to mimic petals), disable gravity slightly for a floating effect.",
+    "smooth_scroll": "Implement Lenis or native smooth scrolling behavior. Add a thin fixed progress bar at the top or subtle scroll-based opacity reveals for sections (framer-motion whileInView)."
+  },
+  "asset_urls": {
+    "ivory_paper_texture": "https://images.pexels.com/photos/5102228/pexels-photo-5102228.jpeg",
+    "gold_foil_texture": "https://images.pexels.com/photos/2248589/pexels-photo-2248589.jpeg",
+    "pink_rose_petals_bg": "https://images.pexels.com/photos/6678406/pexels-photo-6678406.jpeg",
+    "background_music": "https://customer-assets.emergentagent.com/job_200cfdde-0318-4528-9004-cf2c6cf56e67/artifacts/irjyt1ye__Sreeragamo_Bgm_Violin_Cover_Malayalam_Ringtone_%28by%20Fringster.com%29.mp3",
+    "location_link": "https://maps.app.goo.gl/oacr9vV8mYDg7scZ6?g_st=aw"
+  },
+  "instructions_to_main_agent": [
+    "Ensure all components are strictly mobile-first as this is a digital invitation meant primarily for phones.",
+    "Implement the Envelope drag physics securely using framer-motion useMotionValue and useTransform.",
+    "For the scratch card, ensure touch events call e.preventDefault() if necessary to avoid scrolling the page while scratching.",
+    "Include 'data-testid' on all interactive elements (e.g., data-testid='envelope-flap', data-testid='bgm-toggle', data-testid='map-button').",
+    "Do NOT use pure white (#FFFFFF) or pure black (#000000). Use the provided Ivory and Charcoal/Olive colors to maintain the Luxury light archetype.",
+    "Add lucide-react or react-icons for UI elements (music, play/pause, map, share).",
+    "Install framer-motion and canvas-confetti (yarn add framer-motion canvas-confetti).",
+    "Set background music audio element to loop, but require an explicit user interaction (like the envelope open or BGM button click) to start playing to comply with browser auto-play policies."
+  ]
+}

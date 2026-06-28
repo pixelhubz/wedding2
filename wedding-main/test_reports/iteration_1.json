@@ -1,0 +1,41 @@
+{
+  "summary": "Frontend-only testing of the mobile-first wedding invitation. All 14 requested feature checkpoints passed on 414x896 (iPhone) and 360x800 (Android) viewports. Envelope opens via both tap-the-seal and drag-the-flap (>100px upward) interactions. All sections render with correct data-testids, content matches the wedding config, countdown ticks every second, scratch fallback button reveals 21 / AUG / 2026 and 10:00 AM - 10:15 AM, venue map link points to the configured Google Maps short URL, WhatsApp share href starts with https://wa.me/?text= , Copy-link shows 'Link copied' confirmation, BGM button toggles aria-label between Play and Pause states, scroll indicator present, OG meta tags present in index.html. Zero console/page errors during the full flow.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "BGMPlayer.play() is invoked in a useEffect on autoStart without user gesture; Chrome/Safari will reject autoplay and trigger the 'Tap to play music' hint - acceptable but worth noting on real devices.",
+    "ScratchDate.checkRevealProgress() only fires on pointer-up; very fast scratchers reaching threshold mid-stroke will only reveal after lifting - minor UX nit.",
+    "WeddingInvite uses AnimatePresence around letter-content but opened is one-way (no close), so AnimatePresence is effectively unused - cosmetic cleanup."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100%"},
+  "test_credentials": "none required (static site)",
+  "seed_data_creation": "none (static site, no backend)",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Static React app at https://temple-love-story-2.preview.emergentagent.com. Envelope must be opened (tap [data-testid=envelope-open] OR drag [data-testid=envelope-flap] upward >100px) before letter-content renders. Scratch canvas is hard to simulate via Playwright - use the 'or tap here to reveal' fallback button. Use 414x896 viewport for primary tests. All 21 data-testids defined in /app/frontend/src/constants/testIds/wedding.js. Wedding data in /app/frontend/src/config/wedding.js.",
+  "verified_checkpoints": [
+    "envelope-cover visible with 'A sacred invitation' and 'to our wedding' headers and A&S wax seal",
+    "tapping envelope-open reveals letter-content (after ~900ms delay)",
+    "dragging envelope-flap up >100px also opens the envelope",
+    "couple-section shows Aswathy, Sanjay, Aswathy Sreekumar, Sanjay Suresh with & between",
+    "message-section shows 'Mangalyam' script and 'മംഗല്യം' Malayalam mantra",
+    "scratch-card has scratch-canvas overlay and 'or tap here to reveal' fallback that reveals 21/AUG/2026 and 10:00 AM - 10:15 AM",
+    "date-reveal element shows '10:00 AM – 10:15 AM'",
+    "countdown-timer with countdown-days/hours/minutes/seconds, values are non-negative ints and seconds tick down every second",
+    "venue-section shows 'Kunnathoor Devi Temple', 'Kuttamperoor', date, '10:00 AM - 10:15 AM' and map-button href = https://maps.app.goo.gl/oacr9vV8mYDg7scZ6?g_st=aw",
+    "bgm-toggle visible bottom-right, aria-label toggles between 'Play background music' and 'Pause background music' on click",
+    "share-whatsapp href starts with https://wa.me/?text= and is URL-encoded properly",
+    "share-copy button shows 'Link copied' after click",
+    "scroll-indicator present at top of page",
+    "Responsive on 360x800 with no horizontal overflow",
+    "Zero console errors / page errors during full flow",
+    "index.html contains og:title, og:description, og:image and twitter:card meta tags"
+  ]
+}

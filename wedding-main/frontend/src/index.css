@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #FAF9F6;
+  color: #2C2C2C;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+@layer base {
+  :root {
+    /* Wedding palette */
+    --ivory: 44 30% 97%;
+    --ivory-soft: 46 30% 96%;
+    --charcoal: 0 0% 17%;
+    --umber: 26 17% 20%;
+    --gold: 46 65% 52%;
+    --gold-deep: 45 100% 30%;
+    --blush: 0 60% 89%;
+    --rose-gold: 350 35% 57%;
+
+    --background: 44 30% 97%;
+    --foreground: 0 0% 17%;
+    --card: 46 30% 96%;
+    --card-foreground: 0 0% 17%;
+    --popover: 46 30% 96%;
+    --popover-foreground: 0 0% 17%;
+    --primary: 45 100% 30%;
+    --primary-foreground: 44 30% 97%;
+    --secondary: 46 30% 96%;
+    --secondary-foreground: 0 0% 17%;
+    --muted: 46 30% 93%;
+    --muted-foreground: 26 17% 35%;
+    --accent: 0 60% 89%;
+    --accent-foreground: 0 0% 17%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 46 25% 85%;
+    --input: 46 25% 85%;
+    --ring: 45 100% 30%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* === Wedding utilities === */
+.font-script { font-family: 'Allura', cursive; }
+.font-serif-elegant { font-family: 'Marcellus', 'Cormorant Garamond', serif; }
+.font-body { font-family: 'Cormorant Garamond', 'Marcellus', serif; }
+
+.text-gold { color: #997A00; }
+.text-gold-light { color: #D4AF37; }
+.text-rose-gold { color: #B76E79; }
+.text-charcoal { color: #2C2C2C; }
+.text-umber { color: #3B312A; }
+
+.bg-ivory { background-color: #FAF9F6; }
+.bg-ivory-soft { background-color: #FBFBF9; }
+.bg-blush { background-color: #F1D4D4; }
+
+/* Gold shimmer animation for wax seal & text */
+.gold-shimmer {
+  background: linear-gradient(
+    100deg,
+    #997A00 0%,
+    #D4AF37 25%,
+    #F5E6A8 45%,
+    #FFFBEA 50%,
+    #F5E6A8 55%,
+    #D4AF37 75%,
+    #997A00 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-text 5.5s linear infinite;
+}
+
+@keyframes shimmer-text {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.gold-foil-bg {
+  background: linear-gradient(
+    135deg,
+    #B8860B 0%,
+    #D4AF37 25%,
+    #F5E6A8 50%,
+    #D4AF37 75%,
+    #997A00 100%
+  );
+  background-size: 200% 200%;
+  animation: foil-shift 6s ease-in-out infinite;
+}
+
+@keyframes foil-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+/* Ivory paper texture using subtle noise */
+.paper-texture {
+  background-color: #FAF9F6;
+  background-image:
+    radial-gradient(circle at 25% 30%, rgba(212,175,55,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 75% 80%, rgba(183,110,121,0.04) 0%, transparent 40%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.83 0 0 0 0 0.78 0 0 0 0 0.66 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Soft vignette */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(60, 40, 20, 0.12) 100%);
+}
+
+/* Slow vinyl spin */
+.spin-slow {
+  animation: spin 8s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Subtle floating */
+.float-soft {
+  animation: float-soft 5s ease-in-out infinite;
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #D4AF37, #B76E79, #D4AF37);
+  z-index: 100;
+  transform-origin: 0%;
+}
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Mobile-first frame */
+.invite-frame {
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .invite-frame {
+    max-width: 560px;
+  }
+}
+
+/* Ornate divider line */
+.ornate-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #D4AF37 50%, transparent);
+  flex: 1;
+}
+
+/* Prevent flap-drag from scrolling page on touch */
+.no-touch-scroll {
+  touch-action: none;
+}
+
+/* Hide scrollbar in webkit if needed for cleaner mobile feel */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Wax seal */
+.wax-seal {
+  background: radial-gradient(circle at 35% 30%, #F5E6A8 0%, #D4AF37 35%, #997A00 75%, #6B5500 100%);
+  box-shadow:
+    0 4px 12px rgba(120, 90, 0, 0.45),
+    inset 0 -3px 6px rgba(80, 60, 0, 0.5),
+    inset 0 3px 6px rgba(255, 240, 180, 0.6);
+}
+
+/* Selection */
+::selection {
+  background: #F1D4D4;
+  color: #3B312A;
+}
